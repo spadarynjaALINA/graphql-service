@@ -1,0 +1,13 @@
+{
+	"cSpell.words": [
+		"favourites",
+		"mongobd",
+		"nestjs"
+	],
+	"eslint.format.enable": false,
+	"editor.formatOnSave": true,
+	"editor.formatOnPaste": true,
+	"editor.formatOnType": true,
+	"editor.defaultFormatter": "dbaeumer.vscode-eslint",
+	"typescript.format.enable": false
+}
