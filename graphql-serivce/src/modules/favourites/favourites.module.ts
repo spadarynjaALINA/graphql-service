@@ -3,6 +3,6 @@ import { FavouritesResolver } from './resolvers/favourites.resolver';
 import { FavouritesService } from './services/favourites.service';
 
 @Module({
-  providers: [FavouritesResolver, FavouritesService]
+  providers: [FavouritesResolver, FavouritesService],
 })
 export class FavouritesModule {}
