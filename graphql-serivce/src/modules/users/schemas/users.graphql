@@ -1,0 +1,40 @@
+type User {
+    id: ID!
+    firstName: String
+    lastName: String
+    password: String
+    email: String!
+}
+
+type Users {
+  items: [User]
+  limit: Int
+  offset: Int
+
+}
+
+input CreateUser {
+  firstName: String!
+  lastName: String!
+  password: String!
+  email: String!
+}
+
+input Login {
+  email: String!
+  password: String!
+}
+
+type JWT {
+  jwt: String!
+}
+
+type Query {
+    login(login:Login):JWT
+    getUser(id:ID!):User
+    getAllUsers(limit: Int, offset: Int):Users
+}
+
+type Mutation {
+ createUser(user: CreateUser): User
+}

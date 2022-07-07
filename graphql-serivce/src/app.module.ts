@@ -5,13 +5,13 @@ import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
 import { GraphQLModule } from '@nestjs/graphql';
 import { join } from 'path';
 
-// import { AlbumsModule } from './modules/albums/albums.module';
-// import { BandsModule } from './modules/bands/bands.module';
-// import { FavouritesModule } from './modules/favourites/favourites.module';
-// import { GenresModule } from './modules/genres/genres.module';
-// import { TracksModule } from './modules/tracks/tracks.module';
+import { AlbumsModule } from './modules/albums/albums.module';
+import { BandsModule } from './modules/bands/bands.module';
+import { FavouritesModule } from './modules/favourites/favourites.module';
+import { GenresModule } from './modules/genres/genres.module';
+import { TracksModule } from './modules/tracks/tracks.module';
 import { UsersModule } from './modules/users/users.module';
-// import { ArtistsModule } from './modules/artists/artists.module';
+import { ArtistsModule } from './modules/artists/artists.module';
 
 @Module({
   imports: [
@@ -27,12 +27,12 @@ import { UsersModule } from './modules/users/users.module';
       playground: true,
       driver: ApolloDriver,
     }),
-    // ArtistsModule,
-    // AlbumsModule,
-    // BandsModule,
-    // FavouritesModule,
-    // GenresModule,
-    // TracksModule,
+    ArtistsModule,
+    AlbumsModule,
+    BandsModule,
+    FavouritesModule,
+    GenresModule,
+    TracksModule,
     UsersModule,
   ],
   controllers: [AppController],
