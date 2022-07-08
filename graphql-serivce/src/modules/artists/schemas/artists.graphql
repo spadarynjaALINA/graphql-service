@@ -32,14 +32,7 @@ input UpdateArtist {
   bands: [String]
   instruments: String
 }
-type Band {
-    _id: ID!
-    name: String
-    origin: String
-    members: [Member]
-    website: String
-    genres: [Genre]
-}
+
 type Genre {
     _id: ID!
     name: String
