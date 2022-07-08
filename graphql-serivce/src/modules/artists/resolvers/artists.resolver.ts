@@ -6,8 +6,8 @@ import { ArtistsService } from '../services/artists.service';
 export class ArtistsResolver {
   constructor(private readonly artistsService: ArtistsService) {}
   @Query('getArtist')
-  getArtistById(@Args('id') id: string, @Context('token') token: string) {
-    return this.artistsService.getArtist(id, token);
+  getArtistById(@Args('id') id: string) {
+    return this.artistsService.getArtist(id);
   }
   @Query('getArtists')
   getArtists(@Args('limit') limit: number, @Args('offset') offset: number) {

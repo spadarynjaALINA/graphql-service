@@ -1,6 +1,13 @@
 import { Injectable } from '@nestjs/common';
 import axios, { AxiosInstance } from 'axios';
 import { NewArtist, UpdateArtist } from 'src/graphql';
+import {
+  createItem,
+  deleteItem,
+  getItem,
+  getItems,
+  updateItem,
+} from 'src/utils/utils';
 @Injectable()
 export class ArtistsService {
   private readonly url: AxiosInstance;
@@ -10,54 +17,21 @@ export class ArtistsService {
     this.url = axios.create({ baseURL: this.baseURL });
   }
 
-  async getArtist(id: string, token: string) {
-    try {
-      const { data } = await this.url.get(`/${id}`, {
-        headers: { Authorization: token },
-      });
-      return data ? { ...data, id: data._id } : null;
-    } catch (err) {
-      console.error(err);
-    }
+  async getArtist(id: string) {
+    getItem(id, this.url);
   }
 
   async getArtists(limit: number, offset: number) {
-    try {
-      const { data } = await this.url.get(`?limit=${limit}&offset=${offset}`);
-      return data ? { ...data, id: data._id } : null;
-    } catch (err) {
-      console.error(err);
-    }
+    getItems(limit, offset, this.url);
   }
   async createArtist(artist: NewArtist, token: string) {
-    try {
-      const { data } = await this.url.post('/', artist, {
-        headers: { Authorization: token },
-      });
-      return data ? { ...data, id: data._id } : null;
-    } catch (err) {
-      console.error(err);
-    }
+    createItem(artist, token, this.url);
   }
 
   async updateArtist(id: string, artist: UpdateArtist, token: string) {
-    try {
-      const { data } = await this.url.put(`/${id}`, artist, {
-        headers: { Authorization: token },
-      });
-      return data ? { ...data, id: data._id } : null;
-    } catch (err) {
-      console.error(err);
-    }
+    updateItem(id, token, this.url, artist);
   }
   async deleteArtist(id: string, token: string) {
-    try {
-      const { data } = await this.url.delete(`/${id}`, {
-        headers: { Authorization: token },
-      });
-      return data ? { ...data, id: data._id } : null;
-    } catch (err) {
-      console.error(err);
-    }
+    deleteItem(id, token, this.url);
   }
 }

@@ -10,18 +10,18 @@ type Band {
 input NewBand {
     name: String!
     origin: String
-    members: [String]
+    members: [ String]
     website: String
-    genres: [String]
+    genres: [ String]
 }
 
 input UpdateBand {
     _id: ID!
     name: String
     origin: String
-    members: [String]
+    members: [ String]
     website: String
-    genres: [String]
+    genres: [ String]
 }
 type Query {
     getBand(id:ID!):Band

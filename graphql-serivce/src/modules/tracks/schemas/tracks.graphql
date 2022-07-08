@@ -9,8 +9,42 @@ type Track {
     genres: [Genre]
 }
 
+input NewTrack {
+    title: String!
+    album: String
+    artists: [String]
+    bands: [String]
+    duration: Int
+    released: Int
+    genres: [String]
+}
+
+input UpdateTrack {
+    id: ID!
+    title: String
+    album: String
+    artists: [String]
+    bands: [String]
+    duration: Int
+    released: Int
+    genres: [String]
+}
+
+
+
 type Member {
   artist: String
   instrument: String
   years: String
+}
+
+type Query {
+    getTrack(id:ID!):Track
+    getTracks(limit:Int, offset:Int):[Track]
+}
+
+type Mutation {
+    createTrack(newBand:NewTrack):Track
+    updateTrack(id:ID!,updateTrack:UpdateTrack):Track
+    deleteTrack(id:ID!):DeleteData
 }

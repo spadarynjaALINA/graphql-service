@@ -1,6 +1,13 @@
 import { Injectable } from '@nestjs/common';
 import axios, { AxiosInstance } from 'axios';
 import { NewBand, UpdateBand } from 'src/graphql';
+import {
+  createItem,
+  deleteItem,
+  getItem,
+  getItems,
+  updateItem,
+} from 'src/utils/utils';
 @Injectable()
 export class BandsService {
   private readonly url: AxiosInstance;
@@ -11,51 +18,20 @@ export class BandsService {
   }
 
   async getBand(id: string) {
-    try {
-      const { data } = await this.url.get(`/${id}`);
-      return data ? { ...data, id: data._id } : null;
-    } catch (err) {
-      console.error(err);
-    }
+    getItem(id, this.url);
   }
 
   async getBands(limit: number, offset: number) {
-    try {
-      const { data } = await this.url.get(`?limit=${limit}&offset=${offset}`);
-      return data ? { ...data, id: data._id } : null;
-    } catch (err) {
-      console.error(err);
-    }
+    getItems(limit, offset, this.url);
   }
   async createBand(band: NewBand, token: string) {
-    try {
-      const { data } = await this.url.post('/', band, {
-        headers: { Authorization: token },
-      });
-      return data ? { ...data, id: data._id } : null;
-    } catch (err) {
-      console.error(err);
-    }
+    createItem(band, token, this.url);
   }
 
   async updateBand(id: string, band: UpdateBand, token: string) {
-    try {
-      const { data } = await this.url.put(`/${id}`, band, {
-        headers: { Authorization: token },
-      });
-      return data ? { ...data, id: data._id } : null;
-    } catch (err) {
-      console.error(err);
-    }
+    updateItem(id, token, this.url, band);
   }
   async deleteBand(id: string, token: string) {
-    try {
-      const { data } = await this.url.delete(`/${id}`, {
-        headers: { Authorization: token },
-      });
-      return data ? { ...data, id: data._id } : null;
-    } catch (err) {
-      console.error(err);
-    }
+    deleteItem(id, token, this.url);
   }
 }

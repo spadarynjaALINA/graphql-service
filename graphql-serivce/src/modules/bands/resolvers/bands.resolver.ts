@@ -14,20 +14,20 @@ export class BandsResolver {
     return this.bandsService.getBands(limit, offset);
   }
   @Mutation('createBand')
-  createArtist(@Args('artist') band: NewBand, @Context('token') token: string) {
+  createBand(@Args('band') band: NewBand, @Context('token') token: string) {
     return this.bandsService.createBand(band, token);
   }
 
   @Mutation('updateBand')
-  updateArtist(
+  updateBand(
     @Args('id') id: string,
-    @Args('artist') artist: UpdateBand,
+    @Args('Band') band: UpdateBand,
     @Context('token') token: string,
   ) {
-    return this.bandsService.updateBand(id, artist, token);
+    return this.bandsService.updateBand(id, band, token);
   }
   @Mutation('deleteBand')
-  deleteArtist(@Args('id') id: string, @Context('token') token: string) {
+  deleteBand(@Args('id') id: string, @Context('token') token: string) {
     return this.bandsService.deleteBand(id, token);
   }
 }
