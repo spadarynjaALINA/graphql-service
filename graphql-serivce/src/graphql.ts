@@ -9,13 +9,25 @@
 /* eslint-disable */
 export interface NewArtist {
     firstName: string;
+    secondName: string;
+    middleName?: Nullable<string>;
+    birthDate?: Nullable<string>;
+    birthPlace?: Nullable<string>;
+    country: string;
+    bands?: Nullable<Nullable<string>[]>;
+    instruments?: Nullable<Nullable<string>[]>;
+}
+
+export interface UpdateArtist {
+    _id: string;
+    firstName?: Nullable<string>;
     secondName?: Nullable<string>;
     middleName?: Nullable<string>;
     birthDate?: Nullable<string>;
     birthPlace?: Nullable<string>;
     country?: Nullable<string>;
     bands?: Nullable<Nullable<string>[]>;
-    instruments?: Nullable<Nullable<string>[]>;
+    instruments?: Nullable<string>;
 }
 
 export interface CreateUser {
@@ -86,8 +98,15 @@ export interface Artists {
     total?: Nullable<number>;
 }
 
+export interface DeleteData {
+    acknowledged?: Nullable<boolean>;
+    deletedCount?: Nullable<number>;
+}
+
 export interface IMutation {
     createArtist(newArtist?: Nullable<NewArtist>): Nullable<Artist> | Promise<Nullable<Artist>>;
+    updateArtist(id: string, updateArtist?: Nullable<UpdateArtist>): Nullable<Artist> | Promise<Nullable<Artist>>;
+    deleteArtist(id: string): Nullable<DeleteData> | Promise<Nullable<DeleteData>>;
     createUser(user?: Nullable<CreateUser>): Nullable<User> | Promise<Nullable<User>>;
 }
 

@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import axios, { AxiosInstance } from 'axios';
-import { NewArtist } from 'src/graphql';
+import { NewArtist, UpdateArtist } from 'src/graphql';
 @Injectable()
 export class ArtistsService {
   private readonly url: AxiosInstance;
@@ -32,6 +32,27 @@ export class ArtistsService {
   async createArtist(artist: NewArtist, token: string) {
     try {
       const { data } = await this.url.post('/', artist, {
+        headers: { Authorization: token },
+      });
+      return data ? { ...data, id: data._id } : null;
+    } catch (err) {
+      console.error(err);
+    }
+  }
+
+  async updateArtist(id: string, artist: UpdateArtist, token: string) {
+    try {
+      const { data } = await this.url.put(`/${id}`, artist, {
+        headers: { Authorization: token },
+      });
+      return data ? { ...data, id: data._id } : null;
+    } catch (err) {
+      console.error(err);
+    }
+  }
+  async deleteArtist(id: string, token: string) {
+    try {
+      const { data } = await this.url.delete(`/${id}`, {
         headers: { Authorization: token },
       });
       return data ? { ...data, id: data._id } : null;
