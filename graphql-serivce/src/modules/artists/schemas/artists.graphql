@@ -11,12 +11,12 @@ type Artist {
 }
 
 input NewArtist {
-    firstName: String!
-    secondName: String!
+    firstName: String
+    secondName: String
     middleName: String
     birthDate: String
     birthPlace: String
-    country: String!
+    country: String
     bandsIds: [String]
     instruments: [String]
 }
@@ -59,7 +59,7 @@ type Query {
 }
 
 type Mutation {
-    createArtist(newArtist:NewArtist):Artist
+    createArtist(artist:NewArtist):Artist
     updateArtist(id:ID!,updateArtist:UpdateArtist):Artist
     deleteArtist(id:ID!):DeleteData
 }

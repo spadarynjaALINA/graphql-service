@@ -8,6 +8,7 @@ import {
 } from 'src/utils/utils';
 import axios, { AxiosInstance } from 'axios';
 import { NewGenre, UpdateGenre } from 'src/graphql';
+import 'dotenv/config';
 @Injectable()
 export class GenresService {
   private readonly url: AxiosInstance;

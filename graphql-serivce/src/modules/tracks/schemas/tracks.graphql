@@ -31,7 +31,7 @@ input UpdateTrack {
 }
 
 type Member {
-  artist: String
+  artist: Artist!
   instrument: String
   years: String
 }

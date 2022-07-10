@@ -1,6 +1,8 @@
 import { Injectable } from '@nestjs/common';
 import axios, { AxiosInstance } from 'axios';
-import { getItem } from 'src/utils/utils';
+import { getItem, getItems } from 'src/utils/utils';
+import 'dotenv/config';
+import { addFavourites } from 'src/utils/utils';
 @Injectable()
 export class FavouritesService {
   private readonly url: AxiosInstance;
@@ -10,17 +12,27 @@ export class FavouritesService {
     this.url = axios.create({ baseURL: this.baseURL });
   }
 
-  // async getFavourites(limit: number, offset: number) {
-  //   getItems(limit, offset, this.url);
-  // }
-  // async createFavourite(favourite: NewFavourite, token: string) {
-  //   createItem(favourite, token, this.url);
-  // }
+  async addArtistToFavorite(id: string, token: string) {
+    addFavourites(id, token, 'artists');
+  }
 
-  // async updateFavourite(id: string, favourite: UpdateFavourite, token: string) {
-  //   updateItem(id, token, this.url, favourite);
-  // }
-  // async deleteFavourite(id: string, token: string) {
-  //   deleteItem(id, token, this.url);
-  // }
+  async addBandToFavorite(id: string, token: string) {
+    addFavourites(id, token, 'bands');
+  }
+  async addGenreToFavorite(id: string, token: string) {
+    addFavourites(id, token, 'genre');
+  }
+  async addTrackToFavorite(id: string, token: string) {
+    addFavourites(id, token, 'track');
+  }
+  async getFavourites(token: string) {
+    try {
+      const { data } = await this.url.get('/', {
+        headers: { Authorization: token },
+      });
+      return data ? { ...data, id: data._id } : null;
+    } catch (error) {
+      console.error(error);
+    }
+  }
 }

@@ -16,12 +16,12 @@ input updateFavorite {
     tracks: [String]
 }
 type Query {
-    getFavourites(id:ID,limit:Int, offset:Int):[Track]
+    favourites:Favourites
 }
 
 type Mutation {
-    addTrackToFavourites(idUser:ID, idTrack:ID):Favourites
-    addBandToFavourites(idUser:ID, idBand:ID):Favourites
-    addArtistToFavourites(idUser:ID, idArtist:ID):Favourites
-				addGenreToFavourites(idUser:ID, idGenre:ID):Favourites
+    addTrackToFavourites(id:ID,):Favourites
+    addBandToFavourites(id:ID, ):Favourites
+    addArtistToFavourites(id:ID, ):Favourites
+	addGenreToFavourites(id:ID,):Favourites
 }

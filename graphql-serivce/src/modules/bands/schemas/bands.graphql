@@ -23,6 +23,12 @@ input UpdateBand {
     website: String
     genresIds: [ String]
 }
+
+input newMember {
+  artist: ID!
+  instrument: String
+  years: String
+}
 type Query {
     getBand(id:ID!):Band
     getBands(limit:Int, offset:Int):[Band]

@@ -1,6 +1,10 @@
-import { AxiosInstance } from 'axios';
 import { NewAlbum, NewArtist, NewBand, NewGenre, NewTrack } from 'src/graphql';
-
+import axios, { AxiosInstance } from 'axios';
+import 'dotenv/config';
+const favUrl = process.env.FAVOURITES_URL;
+const fav = axios.create({
+  baseURL: favUrl,
+});
 export const deleteItem = async (id: string, token: string, url) => {
   try {
     const { data } = await url.delete(`/${id}`, {
@@ -56,4 +60,12 @@ export const getItems = async (
   } catch (err) {
     console.error(err);
   }
+};
+export const addFavourites = async (id, token, type) => {
+  const { data } = await fav.put(
+    '/add',
+    { type: type, id: id },
+    { headers: { Authorization: token } },
+  );
+  return data ? { ...data, id: data._id } : null;
 };
