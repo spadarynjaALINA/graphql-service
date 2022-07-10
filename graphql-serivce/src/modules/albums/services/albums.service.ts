@@ -8,6 +8,7 @@ import {
   getItems,
   updateItem,
 } from 'src/utils/utils';
+import 'dotenv/config';
 @Injectable()
 export class AlbumsService {
   private readonly url: AxiosInstance;

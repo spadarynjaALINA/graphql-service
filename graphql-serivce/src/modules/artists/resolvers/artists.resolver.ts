@@ -1,10 +1,22 @@
-import { Args, Context, Mutation, Query, Resolver } from '@nestjs/graphql';
+import {
+  Args,
+  Context,
+  Mutation,
+  Parent,
+  Query,
+  ResolveField,
+  Resolver,
+} from '@nestjs/graphql';
 import { NewArtist, UpdateArtist } from 'src/graphql';
+import { BandsService } from 'src/modules/bands/services/bands.service';
 import { ArtistsService } from '../services/artists.service';
 
-@Resolver()
+@Resolver('Artist')
 export class ArtistsResolver {
-  constructor(private readonly artistsService: ArtistsService) {}
+  constructor(
+    private readonly artistsService: ArtistsService,
+    private readonly bandsService: BandsService,
+  ) {}
   @Query('getArtist')
   getArtistById(@Args('id') id: string) {
     return this.artistsService.getArtist(id);
@@ -32,5 +44,14 @@ export class ArtistsResolver {
   @Mutation('deleteArtist')
   deleteArtist(@Args('id') id: string, @Context('token') token: string) {
     return this.artistsService.deleteArtist(id, token);
+  }
+  @ResolveField()
+  async bands(@Parent() artist) {
+    const { bandsIds } = artist;
+    return await Promise.all(
+      bandsIds.map(async (band) => {
+        return this.bandsService.getBand(band);
+      }),
+    );
   }
 }

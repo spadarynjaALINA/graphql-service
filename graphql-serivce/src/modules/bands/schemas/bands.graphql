@@ -12,7 +12,7 @@ input NewBand {
     origin: String
     members: [ String]
     website: String
-    genres: [ String]
+    genresIds: [ String]
 }
 
 input UpdateBand {
@@ -21,7 +21,7 @@ input UpdateBand {
     origin: String
     members: [ String]
     website: String
-    genres: [ String]
+    genresIds: [ String]
 }
 type Query {
     getBand(id:ID!):Band

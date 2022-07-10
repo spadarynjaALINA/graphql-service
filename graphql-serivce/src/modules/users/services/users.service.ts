@@ -1,12 +1,14 @@
 import { Injectable } from '@nestjs/common';
 import axios, { AxiosInstance } from 'axios';
 import { CreateUser, Login } from 'src/graphql';
+import 'dotenv/config';
 @Injectable()
 export class UsersService {
   private readonly url: AxiosInstance;
-  private readonly baseURL: string;
+  private baseURL: string;
   constructor() {
     this.baseURL = process.env.USERS_URL;
+    console.log('base-url:', this.baseURL);
     this.url = axios.create({ baseURL: this.baseURL });
   }
 
@@ -22,6 +24,7 @@ export class UsersService {
   async createUser(user: CreateUser) {
     try {
       const { data } = await this.url.post('/register', user);
+
       return data ? { ...data, id: data._id } : null;
     } catch (err) {
       console.error(err);

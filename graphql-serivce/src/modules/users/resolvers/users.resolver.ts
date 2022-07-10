@@ -12,8 +12,8 @@ export class UsersResolver {
   }
 
   @Mutation('createUser')
-  createUser(@Args('newUser') newUser: CreateUser) {
-    return this.userService.createUser(newUser);
+  createUser(@Args('user') user: CreateUser) {
+    return this.userService.createUser(user);
   }
 
   @Query('login')

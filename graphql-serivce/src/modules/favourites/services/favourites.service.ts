@@ -10,17 +10,17 @@ export class FavouritesService {
     this.url = axios.create({ baseURL: this.baseURL });
   }
 
-  async getFavourites(limit: number, offset: number) {
-    getItems(limit, offset, this.url);
-  }
-  async createFavourite(favourite: NewFavourite, token: string) {
-    createItem(favourite, token, this.url);
-  }
+  // async getFavourites(limit: number, offset: number) {
+  //   getItems(limit, offset, this.url);
+  // }
+  // async createFavourite(favourite: NewFavourite, token: string) {
+  //   createItem(favourite, token, this.url);
+  // }
 
-  async updateFavourite(id: string, favourite: UpdateFavourite, token: string) {
-    updateItem(id, token, this.url, favourite);
-  }
-  async deleteFavourite(id: string, token: string) {
-    deleteItem(id, token, this.url);
-  }
+  // async updateFavourite(id: string, favourite: UpdateFavourite, token: string) {
+  //   updateItem(id, token, this.url, favourite);
+  // }
+  // async deleteFavourite(id: string, token: string) {
+  //   deleteItem(id, token, this.url);
+  // }
 }

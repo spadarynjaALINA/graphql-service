@@ -11,9 +11,9 @@ type Album {
 input NewAlbum {
     name: String!
     released: Int
-    artists: [ String]
+    artistsIds: [ String]
     bands: [String]
-    tracks: [String]
+    tracksIds: [String]
     genres: [String]
     image: String
 }
@@ -22,9 +22,9 @@ input UpdateAlbum {
   _id: ID!
     name: String
     released: Int
-    artists: [ String]
+    artistsIds: [ String]
     bands: [ String]
-    tracks: [ String]
+    tracksIds: [ String]
     genres: [ String]
     image: String
 }
