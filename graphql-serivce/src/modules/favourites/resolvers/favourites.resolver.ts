@@ -65,16 +65,16 @@ export class FavouritesResolver {
   @ResolveField()
   async genres(@Parent() favourites) {
     const { genresIds } = favourites;
-    return await genresIds.map(async (genreId) => {
-      return this.genresService.getGenre(genreId);
+    return await genresIds.map(async (genre) => {
+      return this.genresService.getGenre(genre);
     });
   }
 
   @ResolveField()
   async tracks(@Parent() favourites) {
     const { tracksIds } = favourites;
-    return await tracksIds.map(async (trackId) => {
-      return this.tracksService.getTrack(trackId);
+    return await tracksIds.map(async (track) => {
+      return this.tracksService.getTrack(track);
     });
   }
 }
