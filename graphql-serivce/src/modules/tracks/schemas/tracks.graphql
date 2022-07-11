@@ -20,7 +20,6 @@ input NewTrack {
 }
 
 input UpdateTrack {
-    id: ID!
     title: String
     album: String
     artistsIds: [String]
@@ -35,14 +34,19 @@ type Member {
   instrument: String
   years: String
 }
-
+type Tracks {
+  items: [Track]
+  limit: Int
+  offset: Int
+  total: Int
+}
 type Query {
-    getTrack(id:ID!):Track
-    getTracks(limit:Int, offset:Int):[Track]
+    track(id:ID!):Track
+    tracks(limit:Int, offset:Int):Tracks
 }
 
 type Mutation {
-    createTrack(newBand:NewTrack):Track
+    createTrack(createTrack:NewTrack):Track
     updateTrack(id:ID!,updateTrack:UpdateTrack):Track
     deleteTrack(id:ID!):DeleteData
 }

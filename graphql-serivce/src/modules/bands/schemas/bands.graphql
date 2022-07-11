@@ -16,12 +16,17 @@ input NewBand {
 }
 
 input UpdateBand {
-    _id: ID!
     name: String
     origin: String
     members: [ String]
     website: String
     genresIds: [ String]
+}
+type Bands {
+  items: [Band]
+  limit: Int
+  offset: Int
+  total: Int
 }
 
 input newMember {
@@ -30,12 +35,12 @@ input newMember {
   years: String
 }
 type Query {
-    getBand(id:ID!):Band
-    getBands(limit:Int, offset:Int):[Band]
+    band(id:ID!):Band
+    bands(limit:Int, offset:Int):Bands
 }
 
 type Mutation {
-    createBand(newBand:NewBand):Band
-    updateBand(id:ID!,updateBand:UpdateBand):Band
+    createBand(band:NewBand):Band
+    updateBand(id:ID!,band:UpdateBand):Band
     deleteBand(id:ID!):DeleteData
 }

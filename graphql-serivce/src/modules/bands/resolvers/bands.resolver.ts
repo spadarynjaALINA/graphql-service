@@ -19,11 +19,11 @@ export class BandsResolver {
     private readonly artistsService: ArtistsService,
     private readonly genresService: GenresService,
   ) {}
-  @Query('getBand')
-  getBandById(@Args('id') id: string) {
+  @Query('band')
+  band(@Args('id') id: string) {
     return this.bandsService.getBand(id);
   }
-  @Query('getBands')
+  @Query('bands')
   getBands(@Args('limit') limit: number, @Args('offset') offset: number) {
     return this.bandsService.getBands(limit, offset);
   }
@@ -35,7 +35,7 @@ export class BandsResolver {
   @Mutation('updateBand')
   updateBand(
     @Args('id') id: string,
-    @Args('Band') band: UpdateBand,
+    @Args('band') band: UpdateBand,
     @Context('token') token: string,
   ) {
     return this.bandsService.updateBand(id, band, token);

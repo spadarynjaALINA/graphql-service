@@ -23,23 +23,23 @@ export class AlbumsResolver {
     private readonly genresService: GenresService,
     private readonly tracksService: TracksService,
   ) {}
-  @Query('getAlbum')
-  getAlbumById(@Args('id') id: string) {
+  @Query('album')
+  album(@Args('id') id: string) {
     return this.albumsService.getAlbum(id);
   }
-  @Query('getAlbums')
-  getAlbums(@Args('limit') limit: number, @Args('offset') offset: number) {
+  @Query('albums')
+  albums(@Args('limit') limit: number, @Args('offset') offset: number) {
     return this.albumsService.getAlbums(limit, offset);
   }
   @Mutation('createAlbum')
-  createAlbum(@Args('Album') Album: NewAlbum, @Context('token') token: string) {
+  createAlbum(@Args('album') Album: NewAlbum, @Context('token') token: string) {
     return this.albumsService.createAlbum(Album, token);
   }
 
   @Mutation('updateAlbum')
   updateAlbum(
     @Args('id') id: string,
-    @Args('Album') Album: UpdateAlbum,
+    @Args('album') Album: UpdateAlbum,
     @Context('token') token: string,
   ) {
     return this.albumsService.updateAlbum(id, Album, token);

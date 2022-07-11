@@ -8,7 +8,6 @@ export class UsersService {
   private baseURL: string;
   constructor() {
     this.baseURL = process.env.USERS_URL;
-    console.log('base-url:', this.baseURL);
     this.url = axios.create({ baseURL: this.baseURL });
   }
 
@@ -24,8 +23,7 @@ export class UsersService {
   async createUser(user: CreateUser) {
     try {
       const { data } = await this.url.post('/register', user);
-
-      return data ? { ...data, id: data._id } : null;
+      return { ...data, id: data._id };
     } catch (err) {
       console.error(err);
     }

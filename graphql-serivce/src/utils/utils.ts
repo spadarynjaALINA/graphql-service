@@ -1,4 +1,10 @@
-import { NewAlbum, NewArtist, NewBand, NewGenre, NewTrack } from 'src/graphql';
+import {
+  NewAlbum,
+  CreateArtist,
+  NewBand,
+  NewGenre,
+  NewTrack,
+} from 'src/graphql';
 import axios, { AxiosInstance } from 'axios';
 import 'dotenv/config';
 const favUrl = process.env.FAVOURITES_URL;
@@ -10,6 +16,7 @@ export const deleteItem = async (id: string, token: string, url) => {
     const { data } = await url.delete(`/${id}`, {
       headers: { Authorization: token },
     });
+
     return data ? { ...data, id: data._id } : null;
   } catch (err) {
     console.error(err);
@@ -27,15 +34,18 @@ export const updateItem = async (id: string, token: string, url, item) => {
   }
 };
 export const createItem = async (
-  item: NewAlbum | NewArtist | NewBand | NewGenre | NewTrack,
+  item: NewAlbum | CreateArtist | NewBand | NewGenre | NewTrack,
   token: string,
-  url: AxiosInstance,
+  url,
 ) => {
+
   try {
+
     const { data } = await url.post('/', item, {
       headers: { Authorization: token },
     });
-    return data ? { ...data, id: data._id } : null;
+
+    return { ...data, id: data._id }
   } catch (err) {
     console.error(err);
   }
@@ -43,7 +53,9 @@ export const createItem = async (
 
 export const getItem = async (id: string, url: AxiosInstance) => {
   try {
+
     const { data } = await url.get(`/${id}`);
+
     return data ? { ...data, id: data._id } : null;
   } catch (err) {
     console.error(err);
@@ -56,16 +68,22 @@ export const getItems = async (
 ) => {
   try {
     const { data } = await url.get(`?limit=${limit}&offset=${offset}`);
-    return data ? { ...data, id: data._id } : null;
+
+    data.items = data.items.map((item) => {
+        return { ...item, id: item._id };
+      });
+      return data;
   } catch (err) {
     console.error(err);
   }
 };
+
 export const addFavourites = async (id, token, type) => {
   const { data } = await fav.put(
     '/add',
-    { type: type, id: id },
+    { type, id},
     { headers: { Authorization: token } },
   );
+  console.log(data)
   return data ? { ...data, id: data._id } : null;
 };

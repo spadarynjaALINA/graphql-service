@@ -1,5 +1,5 @@
 type Artist {
-    _id: ID!
+    id: ID!
     firstName: String
     secondName: String
     middleName: String
@@ -10,19 +10,18 @@ type Artist {
     instruments: [String]
 }
 
-input NewArtist {
-    firstName: String
-    secondName: String
+input CreateArtist {
+    firstName: String!
+    secondName: String!
     middleName: String
     birthDate: String
     birthPlace: String
-    country: String
+    country: String!
     bandsIds: [String]
     instruments: [String]
 }
 
 input UpdateArtist {
-  _id: ID!
   firstName: String
   secondName: String
   middleName: String
@@ -54,12 +53,12 @@ acknowledged: Boolean
 }
 
 type Query {
-    getArtist(id:ID!):Artist
-    getArtists(limit:Int, offset:Int):Artists
+    artist(id:ID!):Artist
+    artists(limit:Int, offset:Int):Artists
 }
 
 type Mutation {
-    createArtist(artist:NewArtist):Artist
+    createArtist(artist:CreateArtist):Artist
     updateArtist(id:ID!,updateArtist:UpdateArtist):Artist
     deleteArtist(id:ID!):DeleteData
 }

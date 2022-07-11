@@ -15,24 +15,28 @@ export class BandsService {
   private readonly baseURL: string;
   constructor() {
     this.baseURL = process.env.BANDS_URL;
-    this.url = axios.create({ baseURL: this.baseURL });
   }
 
   async getBand(id: string) {
-    getItem(id, this.url);
+    const url = axios.create({ baseURL: this.baseURL });
+   return await getItem(id, url);
   }
 
   async getBands(limit: number, offset: number) {
-    getItems(limit, offset, this.url);
+    const url = axios.create({ baseURL: this.baseURL });
+   return await getItems(limit, offset, url);
   }
   async createBand(band: NewBand, token: string) {
-    createItem(band, token, this.url);
+    const url = axios.create({ baseURL: this.baseURL });
+   return await createItem(band, token, url);
   }
 
   async updateBand(id: string, band: UpdateBand, token: string) {
-    updateItem(id, token, this.url, band);
+    const url = axios.create({ baseURL: this.baseURL });
+   return await updateItem(id, token, url, band);
   }
   async deleteBand(id: string, token: string) {
-    deleteItem(id, token, this.url);
+    const url = axios.create({ baseURL: this.baseURL });
+   return await deleteItem(id, token, url);
   }
 }

@@ -23,26 +23,26 @@ export class TracksResolver {
     private readonly bandsService: BandsService,
     private readonly genresService: GenresService,
   ) {}
-  @Query('getTrack')
-  getTrackById(@Args('id') id: string) {
+  @Query('track')
+  track(@Args('id') id: string) {
     return this.tracksService.getTrack(id);
   }
-  @Query('getTracks')
-  getTracks(@Args('limit') limit: number, @Args('offset') offset: number) {
+  @Query('tracks')
+  tracks(@Args('limit') limit: number, @Args('offset') offset: number) {
     return this.tracksService.getTracks(limit, offset);
   }
   @Mutation('createTrack')
-  createTrack(@Args('Track') track: NewTrack, @Context('token') token: string) {
-    return this.tracksService.createTrack(track, token);
+  createTrack(@Args('createTrack') newTrack: NewTrack, @Context('token') token: string) {
+    return this.tracksService.createTrack(newTrack, token);
   }
 
   @Mutation('updateTrack')
   updateTrack(
     @Args('id') id: string,
-    @Args('Track') track: UpdateTrack,
+    @Args('updateTrack') newTrack: UpdateTrack,
     @Context('token') token: string,
   ) {
-    return this.tracksService.updateTrack(id, track, token);
+    return this.tracksService.updateTrack(id, newTrack, token);
   }
   @Mutation('deleteTrack')
   deleteTrack(@Args('id') id: string, @Context('token') token: string) {

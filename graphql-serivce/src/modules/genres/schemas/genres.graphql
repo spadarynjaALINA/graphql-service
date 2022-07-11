@@ -12,9 +12,13 @@ input NewGenre {
     country: String
     year: Int
 }
-
+type Genres {
+  items: [Genre]
+  limit: Int
+  offset: Int
+  total: Int
+}
 input UpdateGenre {
-    id: ID!
     name: String
     description: String
     country: String
@@ -22,8 +26,8 @@ input UpdateGenre {
 }
 
 type Query {
-    getGenre(id:ID!):Genre
-    getGenres(limit:Int, offset:Int):[Genre]
+    genre(id:ID!):Genre
+    genres(limit:Int, offset:Int):Genres
 }
 
 type Mutation {

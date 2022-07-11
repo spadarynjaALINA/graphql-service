@@ -15,23 +15,29 @@ export class GenresService {
   private readonly baseURL: string;
   constructor() {
     this.baseURL = process.env.GENRES_URL;
-    this.url = axios.create({ baseURL: this.baseURL });
+
   }
   async getGenre(id: string) {
-    getItem(id, this.url);
+    const url =axios.create({ baseURL: this.baseURL });
+   return await getItem(id, url);
   }
 
   async getGenres(limit: number, offset: number) {
-    getItems(limit, offset, this.url);
+    const url =axios.create({ baseURL: this.baseURL });
+   return await getItems(limit, offset, url);
   }
-  async createGenre(genre: NewGenre, token: string) {
-    createItem(genre, token, this.url);
+  async createGenre(newGenre: NewGenre, token: string) {
+    const url =axios.create({ baseURL: this.baseURL });
+   return await createItem(newGenre, token, url);
   }
 
   async updateGenre(id: string, genre: UpdateGenre, token: string) {
-    updateItem(id, token, this.url, genre);
+     const url =axios.create({ baseURL: this.baseURL });
+   return await updateItem(id, token, url, genre);
   }
   async deleteGenre(id: string, token: string) {
-    deleteItem(id, token, this.url);
+    const url =axios.create({ baseURL: this.baseURL });
+   return await
+    deleteItem(id, token, url);
   }
 }

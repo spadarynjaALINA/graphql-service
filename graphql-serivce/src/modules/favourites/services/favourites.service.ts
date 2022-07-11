@@ -9,27 +9,29 @@ export class FavouritesService {
   private readonly baseURL: string;
   constructor() {
     this.baseURL = process.env.FAVOURITES_URL;
-    this.url = axios.create({ baseURL: this.baseURL });
+
   }
 
   async addArtistToFavorite(id: string, token: string) {
-    addFavourites(id, token, 'artists');
+     return await addFavourites(id, token, 'artists');
   }
 
   async addBandToFavorite(id: string, token: string) {
-    addFavourites(id, token, 'bands');
+     return await addFavourites(id, token, 'bands');
   }
   async addGenreToFavorite(id: string, token: string) {
-    addFavourites(id, token, 'genre');
+     return await addFavourites(id, token, 'genre');
   }
   async addTrackToFavorite(id: string, token: string) {
-    addFavourites(id, token, 'track');
+    return await addFavourites(id, token, 'track');
   }
   async getFavourites(token: string) {
+    const url = axios.create({ baseURL: this.baseURL });
     try {
-      const { data } = await this.url.get('/', {
+      const { data } = await url.get('/', {
         headers: { Authorization: token },
       });
+      console.log(data,"<--------")
       return data ? { ...data, id: data._id } : null;
     } catch (error) {
       console.error(error);

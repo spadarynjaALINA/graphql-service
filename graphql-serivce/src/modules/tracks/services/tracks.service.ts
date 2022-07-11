@@ -15,24 +15,32 @@ export class TracksService {
   private readonly baseURL: string;
   constructor() {
     this.baseURL = process.env.TRACKS_URL;
-    this.url = axios.create({ baseURL: this.baseURL });
+
   }
 
   async getTrack(id: string) {
-    getItem(id, this.url);
+     const url = axios.create({ baseURL: this.baseURL });
+   return await getItem(id, url);
   }
 
   async getTracks(limit: number, offset: number) {
-    getItems(limit, offset, this.url);
+    const url = axios.create({ baseURL: this.baseURL });
+   return await getItems(limit, offset, url);
   }
   async createTrack(track: NewTrack, token: string) {
-    createItem(track, token, this.url);
+    const url = axios.create({ baseURL: this.baseURL });
+   return await
+    createItem(track, token, url);
   }
 
   async updateTrack(id: string, track: UpdateTrack, token: string) {
-    updateItem(id, token, this.url, track);
+    const url = axios.create({ baseURL: this.baseURL });
+   return await
+    updateItem(id, token, url, track);
   }
   async deleteTrack(id: string, token: string) {
-    deleteItem(id, token, this.url);
+    const url = axios.create({ baseURL: this.baseURL });
+   return await
+    deleteItem(id, token, url);
   }
 }
