@@ -7,7 +7,7 @@ type Favourites {
     tracks: [Track]
 }
 
-input AddItemToFavorites {
+input AddItemToFavourites {
 	   id: ID!
     userId: ID!
     bands: [String]

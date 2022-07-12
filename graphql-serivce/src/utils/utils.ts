@@ -7,7 +7,7 @@ import {
 } from 'src/graphql';
 import axios, { AxiosInstance } from 'axios';
 import 'dotenv/config';
-const favUrl = process.env.FAVOURITES_URL;
+const favUrl = process.env.FAVORITES_URL;
 const fav = axios.create({
   baseURL: favUrl,
 });
@@ -38,14 +38,12 @@ export const createItem = async (
   token: string,
   url,
 ) => {
-
   try {
-
     const { data } = await url.post('/', item, {
       headers: { Authorization: token },
     });
 
-    return { ...data, id: data._id }
+    return { ...data, id: data._id };
   } catch (err) {
     console.error(err);
   }
@@ -53,7 +51,6 @@ export const createItem = async (
 
 export const getItem = async (id: string, url: AxiosInstance) => {
   try {
-
     const { data } = await url.get(`/${id}`);
 
     return data ? { ...data, id: data._id } : null;
@@ -70,20 +67,25 @@ export const getItems = async (
     const { data } = await url.get(`?limit=${limit}&offset=${offset}`);
 
     data.items = data.items.map((item) => {
-        return { ...item, id: item._id };
-      });
-      return data;
+      return { ...item, id: item._id };
+    });
+    return data;
   } catch (err) {
     console.error(err);
   }
 };
 
-export const addFavourites = async (id, token, type) => {
+export const addFavourites = async (
+  id: string,
+  token: string,
+  type: string,
+) => {
+
   const { data } = await fav.put(
     '/add',
-    { type, id},
+    { type, id },
     { headers: { Authorization: token } },
   );
-  console.log(data)
+  console.log(data);
   return data ? { ...data, id: data._id } : null;
 };

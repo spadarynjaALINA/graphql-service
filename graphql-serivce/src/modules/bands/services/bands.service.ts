@@ -19,24 +19,24 @@ export class BandsService {
 
   async getBand(id: string) {
     const url = axios.create({ baseURL: this.baseURL });
-   return await getItem(id, url);
+    return await getItem(id, url);
   }
 
   async getBands(limit: number, offset: number) {
     const url = axios.create({ baseURL: this.baseURL });
-   return await getItems(limit, offset, url);
+    return await getItems(limit, offset, url);
   }
   async createBand(band: NewBand, token: string) {
     const url = axios.create({ baseURL: this.baseURL });
-   return await createItem(band, token, url);
+    return await createItem(band, token, url);
   }
 
   async updateBand(id: string, band: UpdateBand, token: string) {
     const url = axios.create({ baseURL: this.baseURL });
-   return await updateItem(id, token, url, band);
+    return await updateItem(id, token, url, band);
   }
   async deleteBand(id: string, token: string) {
     const url = axios.create({ baseURL: this.baseURL });
-   return await deleteItem(id, token, url);
+    return await deleteItem(id, token, url);
   }
 }

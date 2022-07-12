@@ -71,7 +71,7 @@ export interface NewMember {
     years?: Nullable<string>;
 }
 
-export interface AddItemToFavorites {
+export interface AddItemToFavourites {
     id: string;
     userId: string;
     bands?: Nullable<Nullable<string>[]>;
